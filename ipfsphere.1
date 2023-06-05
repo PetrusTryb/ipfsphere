@@ -1,42 +1,84 @@
-.\" Manpage for ipfsphere.sh
-.\" Contact: Piotr Trybisz (ptrybisz@gmail.com)
-.\" Created on: 17.05.2023
-.\" Last modified: 17.05.2023
-.\" Version: 0.1
-.\" Description: decentralised chat using ipfs
-.\" 
-.\" Licensed under GPL (see /usr/share/common-licenses/GPL for more details
-.\" or contact the Free Software Foundation for a copy)
-.TH IPFSPHERE.SH 1 "17.05.2023" "0.1" "decentralised chat using ipfs"
+.IPFSphere(1)
 .SH NAME
-ipfsphere.sh \- decentralised chat using ipfs
+.IPFSphere \- decentralised chat using IPFS
 .SH SYNOPSIS
 .B ipfsphere.sh
-[OPTION]
+[\-h]
+[\-v]
+[\-r]
+[\-s]
 .SH DESCRIPTION
-This script provides a decentralised chat using IPFS (InterPlanetary File System). It allows users to communicate in different channels and exchange messages in a distributed manner.
-.SH OPTIONS
-.IP "-h"
-Displays the help message, providing information about the available options and their usage.
-.IP "-v"
-Displays version information and checks for updates. If a new version is available, it prompts the user to update.
-.IP "-r"
-Resets the ipfsphere application, deleting all data, including messages and certificates.
-.IP "-s"
-Shuts down the ipfsphere application by stopping the IPFS daemon.
-.SH WARNING
-This script is still in development, and its usage is at your own risk.
-.SH AUTHORS
+.IPFSphere is a decentralised chat application that utilizes the InterPlanetary File System (IPFS) for communication. It provides a command-line interface for interacting with the chat channels.
+.PP
+.IPFSphere supports the following options:
+.TP
+.B \-h
+Display help information and exit.
+.TP
+.B \-v
+Display version information and install update if available.
+.TP
+.B \-r
+Reset IPFSphere, deleting all data including messages and certificates.
+.TP
+.B \-s
+Shutdown IPFSphere by stopping the IPFS daemon.
+.SH FUNCTIONS
+.IP
+The following functions are available in IPFSphere:
+.TP
+.B version
+Displays the version information of the IPFSphere script. If an update is available, it prompts the user to update the script.
+.TP
+.B help
+Displays the help information, including the usage and available options of the IPFSphere script.
+.TP
+.B init
+Initializes the IPFS environment and starts the IPFS daemon if necessary. It also enables the required IPFS configuration for IPFSphere.
+.TP
+.B config
+Configures the user's nickname and generates the RSA keypair for the user. It publishes the public key and saves the nickname for future use.
+.TP
+.B mainwindow
+Opens the main chat window where the user can select and interact with different chat channels. It subscribes to the saved channels and displays the messages in each channel.
+.TP
+.B addchannel
+Prompts the user to enter a new channel name and adds it to the list of channels. It subscribes to the new channel and starts the refresh service for that channel.
+.TP
+.B channelwindow
+Opens a specific chat channel window where the user can view and write messages. It displays the messages in the channel and allows the user to publish new messages.
+.TP
+.B sign_message
+Signs a message with the user's private key and returns the signed message.
+.TP
+.B verify_message
+Verifies the signature of a message using the provided public key and returns the verification result.
+.TP
+.B timestamp_to_date
+Converts a UNIX timestamp to a human-readable date format.
+.TP
+.B date_to_timestamp
+Converts a date string to a UNIX timestamp.
+.TP
+.B process_channel_data
+Processes the data received from a chat channel. It checks if the data is already processed, verifies the signature, and adds the messages to the respective channel files.
+.TP
+.B refresh_service
+Continuously refreshes the chat channels by processing new data. It runs in the background and ensures that new messages are displayed in real-time.
+.TP
+.B request_resend
+Sends a resend request to a chat channel, requesting a synchronization of messages. It notifies other participants to resend the messages from a specific date.
+.TP
+.B handle_resend_request
+Handles a resend request by synchronizing the messages from a chat channel. It retrieves the messages within the requested timeframe and publishes them to the channel.
+.SH AUTHOR
 Piotr Trybisz (ptrybisz@gmail.com)
 .SH COPYRIGHT
-This script is licensed under the GPL (GNU General Public License). Please refer to /usr/share/common-licenses/GPL or contact the Free Software Foundation for more details.
-.SH "SEE ALSO"
-.IP "\fBipfs\fR(1)"
-.IP "\fBdialog\fR(1)"
-.IP "\fBcurl\fR(1)"
-.IP "\fBopenssl\fR(1)"
-.IP "\fBgrep\fR(1)"
-.IP "\fBawk\fR(1)"
-.SH "BUGS"
-No known bugs.
-
+.IP
+.IPFSphere is licensed under the GNU General Public License (GPL). Please see /usr/share/common-licenses/GPL for more details or contact the Free Software Foundation for a copy.
+.SH CREATED
+17.05.2023
+.SH LAST MODIFIED
+17.05.2023
+.SH VERSION
+0.1
